@@ -1,0 +1,48 @@
+{
+    "name": "metasyntactical/xml-tools",
+    "description": "Several XML tools for PHP",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Kreuer",
+            "email": "d.kreuer@danielkreuer.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.5.0",
+        "beberlei/assert": "~2.3",
+        "psr/log": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5",
+        "apigen/apigen": "~4.0",
+        "metasyntactical/symfony-coding-standard": "~1.0",
+        "metasyntactical/composer-codesniffer-hooks": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MetaSyntactical\\Xml\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MetaSyntactical\\Xml\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "MetaSyntactical\\CodeSniffer\\Composer\\ScriptHandler::addPhpCsToPreCommitHook"
+        ],
+        "post-update-cmd": [
+            "MetaSyntactical\\CodeSniffer\\Composer\\ScriptHandler::addPhpCsToPreCommitHook"
+        ]
+    },
+    "extra": {
+        "codesniffer": {
+            "standard": {
+                "dependency": "metasyntactical/symfony-coding-standard/Symfony2"
+            }
+        }
+    }
+}

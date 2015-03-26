@@ -1,0 +1,11 @@
+source:
+    - src
+
+destination: build/apidoc
+
+noSourceCode: true
+templateTheme: bootstrap
+deprecated: true
+accessLevels:
+    - public
+    - protected
