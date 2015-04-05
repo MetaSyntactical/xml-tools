@@ -357,6 +357,11 @@ class XmlStreamReader implements LoggerAwareInterface
 
     private function addData($parser, $data)
     {
+        if (mb_substr($data, 0, 2) == "<?" || in_array($data, ["\n", "\r\n"])) {
+            // parsing instruction occurred in hhvm, skip
+            return;
+        }
+
         $this->logger->debug("method entry", ["method" => __FUNCTION__, "tag" => end($this->currentPath), "data" => $data]);
 
         foreach ($this->pathData as $key => $val) {
