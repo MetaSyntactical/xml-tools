@@ -19,6 +19,18 @@ use PHPUnit_Framework_TestCase;
  */
 class ResourceXmlStreamTest extends PHPUnit_Framework_TestCase
 {
+    private $socket;
+
+    /**
+     * Tear down.
+     */
+    public function tearDown()
+    {
+        if (is_resource($this->socket)) {
+            socket_close($this->socket);
+        }
+    }
+
     /**
      * Test that object can be instantiated with valid resource.
      */
@@ -44,8 +56,8 @@ class ResourceXmlStreamTest extends PHPUnit_Framework_TestCase
     public function testThatObjectWontBeInstantiatedWithResourceWhichIsNoStream()
     {
         $this->setExpectedException("InvalidArgumentException", "to be a readable stream");
-        $resource = fopen("php://memory", "rw");
-        new ResourceXmlStream($resource);
+        $this->socket = socket_create(AF_INET, SOCK_DGRAM, getprotobyname('udp'));
+        new ResourceXmlStream($this->socket);
     }
 
     /**

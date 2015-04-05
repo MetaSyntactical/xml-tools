@@ -25,7 +25,11 @@ final class ResourceXmlStream extends AbstractXmlStream
      */
     public function __construct($resource)
     {
-        $streamInfo = stream_get_meta_data($resource);
+        try {
+            $streamInfo = stream_get_meta_data($resource);
+        } catch (\Exception $e) {
+            $streamInfo = array("mode" => "");
+        }
         if (stristr($streamInfo["mode"], "r") === false) {
             $message = 'Stream "<RESOURCE>" was expected to be a readable stream resource.';
 
